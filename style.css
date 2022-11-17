@@ -1,0 +1,117 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(60deg, rgba(224,196,253,1) 22%, rgba(71,136,201,1) 77%);
+    margin: 0;
+}
+
+:root {
+    --cell-size: 100px;
+    --mark-size: calc(var(--cell-size) * .9);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.display-message {
+    display: none;
+    padding: 2rem;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+}
+
+.display-message.show {
+    display: flex;
+}
+
+.board {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    align-content: center;
+    justify-content: center;
+}
+
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    background-color: whitesmoke;
+    border: 2px solid black;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.cell.x,
+.cell.o {
+    cursor: not-allowed;
+}
+/****************X Marker********************/
+.cell.x::before,
+.cell.x::after {
+    background-color: black;
+}
+
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after {
+    background-color: lightgray;
+}
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after {
+    content: '';
+    position: absolute;
+    height: var(--mark-size);
+    width: calc(var(--mark-size) * .15);
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.o):hover::before {
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::after {
+    transform: rotate(-45deg);
+}
+
+/****************Circle Marker********************/
+.cell.o::before,
+.cell.o::after {
+    background-color: black;
+}
+
+.board.o .cell:not(.x):not(.o):hover::before,
+.board.o .cell:not(.x):not(.o):hover::after {
+    background-color: lightgray;
+}
+
+.cell.o::before,
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::before,
+.board.o .cell:not(.x):not(.o):hover::after {
+    content: '';
+    position: absolute;
+    height: var(--mark-size);
+    width: var(--mark-size);
+    border-radius: 50%;
+}
+
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::after {
+    height: calc(var(--mark-size) * .7);
+    width: calc(var(--mark-size) * .7);
+    background-color: whitesmoke;
+}
